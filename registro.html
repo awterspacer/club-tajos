@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="es-PY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Unite al Club Tajos</title>
+  <meta name="description" content="Creá tu tarjeta del Club Tajos, sumá visitas en cada servicio y accedé a promociones y beneficios exclusivos.">
+
+  <meta name="theme-color" content="{{COLOR_THEME}}">
+  <link rel="canonical" href="{{URL_CANONICA_REGISTRO}}">
+  <link rel="icon" href="{{RUTA_FAVICON}}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Unite al Club Tajos">
+  <meta property="og:description" content="Creá tu tarjeta del Club Tajos, sumá visitas en cada servicio y accedé a promociones y beneficios exclusivos.">
+  <meta property="og:url" content="{{URL_CANONICA_REGISTRO}}">
+  <meta property="og:image" content="{{URL_OG_IMAGE}}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unite al Club Tajos">
+  <meta name="twitter:description" content="Creá tu tarjeta del Club Tajos, sumá visitas en cada servicio y accedé a promociones y beneficios exclusivos.">
+  <meta name="twitter:image" content="{{URL_OG_IMAGE}}">
+
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="stylesheet" href="{{RUTA_CSS}}">
+
+  <script defer src="{{RUTA_JS_CORE}}"></script>
+  <script defer src="{{RUTA_JS_UI}}"></script>
+  <script defer src="{{RUTA_JS_REGISTRO}}"></script>
+</head>
+<body>
+
+  <a class="club-skip" href="#contenido">Saltar al contenido</a>
+
+  <noscript>
+    <p class="club-noscript">Activá JavaScript para completar el registro.</p>
+  </noscript>
+
+  <!-- HEADER -->
+  <header class="club-header">
+    <a class="club-header__marca" href="index.html">
+      <img class="club-header__logo" src="{{RUTA_LOGO}}" alt="Tajos" width="48" height="48">
+      <span class="club-header__nombre">Club Tajos</span>
+    </a>
+
+    <div class="club-header__acciones">
+      <a class="club-btn club-btn--secundario" href="index.html">Volver</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- VISTA: FORMULARIO -->
+    <section class="club-registro" data-club="vista-form" aria-labelledby="club-registro-titulo">
+      <h1 class="club-registro__titulo" id="club-registro-titulo">Unite al Club Tajos</h1>
+      <p class="club-registro__texto">
+        Con <span data-club="visitas-requeridas">varias</span> visitas podés conseguir <span data-club="premio">un premio especial</span>.
+      </p>
+      <p class="club-registro__nota">Te lleva menos de un minuto.</p>
+
+      <form class="club-form" data-club="registro-form" novalidate>
+        <p class="club-form__error" role="alert" data-club="form-error" hidden></p>
+
+        <div class="club-form__aviso" data-club="ya-registrado" hidden>
+          <p>Ese número ya tiene tarjeta. Ingresá desde la página principal.</p>
+          <a class="club-btn club-btn--secundario" href="index.html" data-club="link-ingresar">Ir a ingresar</a>
+        </div>
+
+        <!-- DATOS PERSONALES -->
+        <fieldset class="club-fieldset">
+          <legend class="club-fieldset__legend">Sobre vos</legend>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-nombre">Nombre completo</label>
+            <input
+              class="club-field__input"
+              id="club-nombre"
+              name="nombre_completo"
+              type="text"
+              autocomplete="name"
+              minlength="3"
+              maxlength="120"
+              required
+              aria-describedby="club-nombre-error"
+            >
+            <p class="club-field__error" id="club-nombre-error" data-club-error="nombre_completo" hidden></p>
+          </div>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-whatsapp">WhatsApp</label>
+            <input
+              class="club-field__input"
+              id="club-whatsapp"
+              name="whatsapp"
+              type="tel"
+              inputmode="tel"
+              autocomplete="tel"
+              placeholder="0981 123 456"
+              required
+              aria-describedby="club-whatsapp-ayuda club-whatsapp-error"
+            >
+            <p class="club-field__ayuda" id="club-whatsapp-ayuda">Con este número vamos a reconocerte en caja para sumar tus visitas.</p>
+            <p class="club-field__error" id="club-whatsapp-error" data-club-error="whatsapp" hidden></p>
+          </div>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-fecha">Fecha de nacimiento</label>
+            <input
+              class="club-field__input"
+              id="club-fecha"
+              name="fecha_nacimiento"
+              type="date"
+              autocomplete="bday"
+              required
+              aria-describedby="club-fecha-error"
+            >
+            <p class="club-field__error" id="club-fecha-error" data-club-error="fecha_nacimiento" hidden></p>
+
+            <button class="club-field__toggle" type="button" data-club="toggle-rango">Prefiero indicar solo mi rango de edad</button>
+          </div>
+
+          <div class="club-field" hidden>
+            <label class="club-field__label" for="club-rango">Rango de edad (opcional)</label>
+            <select
+              class="club-field__input"
+              id="club-rango"
+              name="rango_edad"
+              hidden
+              disabled
+              aria-describedby="club-rango-error"
+            >
+              <option value="">Elegí tu rango</option>
+              <option value="1">Hasta 10 años</option>
+              <option value="2">11 a 20</option>
+              <option value="3">21 a 30</option>
+              <option value="4">31 a 40</option>
+              <option value="5">41 a 50</option>
+              <option value="6">51 a 60</option>
+              <option value="7">61 a 70</option>
+              <option value="8">71 a 100</option>
+            </select>
+            <p class="club-field__error" id="club-rango-error" data-club-error="rango_edad" hidden></p>
+          </div>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-nacionalidad">Nacionalidad</label>
+            <input
+              class="club-field__input"
+              id="club-nacionalidad"
+              name="nacionalidad"
+              type="text"
+              list="club-nacionalidades"
+              maxlength="60"
+              required
+              aria-describedby="club-nacionalidad-error"
+            >
+            <datalist id="club-nacionalidades">
+              <option value="Paraguaya"></option>
+              <option value="Argentina"></option>
+              <option value="Brasileña"></option>
+              <option value="Uruguaya"></option>
+              <option value="Boliviana"></option>
+              <option value="Chilena"></option>
+              <option value="Colombiana"></option>
+              <option value="Venezolana"></option>
+              <option value="Peruana"></option>
+              <option value="Española"></option>
+              <option value="Otra"></option>
+            </datalist>
+            <p class="club-field__error" id="club-nacionalidad-error" data-club-error="nacionalidad" hidden></p>
+          </div>
+        </fieldset>
+
+        <!-- UBICACIÓN -->
+        <fieldset class="club-fieldset">
+          <legend class="club-fieldset__legend">Dónde vivís</legend>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-ciudad">Ciudad</label>
+            <input
+              class="club-field__input"
+              id="club-ciudad"
+              name="ciudad"
+              type="text"
+              autocomplete="address-level2"
+              maxlength="80"
+              required
+              aria-describedby="club-ciudad-error"
+            >
+            <p class="club-field__error" id="club-ciudad-error" data-club-error="ciudad" hidden></p>
+          </div>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-barrio">Barrio</label>
+            <input
+              class="club-field__input"
+              id="club-barrio"
+              name="barrio"
+              type="text"
+              maxlength="80"
+              required
+              aria-describedby="club-barrio-error"
+            >
+            <p class="club-field__error" id="club-barrio-error" data-club-error="barrio" hidden></p>
+          </div>
+        </fieldset>
+
+        <!-- PREFERENCIAS -->
+        <fieldset class="club-fieldset">
+          <legend class="club-fieldset__legend">Tu estilo en Tajos</legend>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-barbero">Barbero de preferencia (opcional)</label>
+            <select
+              class="club-field__input"
+              id="club-barbero"
+              name="barbero_pref"
+              aria-describedby="club-barbero-error"
+            >
+              <option value="">Sin preferencia</option>
+            </select>
+            <p class="club-field__error" id="club-barbero-error" data-club-error="barbero_pref" hidden></p>
+          </div>
+
+          <fieldset class="club-field club-field--grupo" data-club="lista-servicios">
+            <legend class="club-field__label">Servicios habituales (opcional)</legend>
+            <p class="club-field__vacio" data-club="servicios-vacio" hidden>No pudimos cargar los servicios. Podés continuar sin elegirlos.</p>
+          </fieldset>
+        </fieldset>
+
+        <!-- CÓMO NOS CONOCISTE -->
+        <fieldset class="club-fieldset">
+          <legend class="club-fieldset__legend">Conocenos</legend>
+
+          <div class="club-field">
+            <label class="club-field__label" for="club-ig">Usuario de Instagram (opcional)</label>
+            <div class="club-field__prefijo">
+              <span class="club-field__arroba" aria-hidden="true">@</span>
+              <input
+                class="club-field__input club-field__input--prefijo"
+                id="club-ig"
+                name="usuario_ig"
+                type="text"
+                autocapitalize="none"
+                autocomplete="off"
+                maxlength="31"
+                pattern="@?[A-Za-z0-9._]{1,30}"
+                aria-describedby="club-ig-error"
+              >
+            </div>
+            <p class="club-field__error" id="club-ig-error" data-club-error="usuario_ig" hidden></p>
+          </div>
+
+          <fieldset class="club-field club-field--grupo">
+            <legend class="club-field__label">¿Cómo llegaste a Tajos?</legend>
+
+            <label class="club-check">
+              <input class="club-check__input" type="radio" name="como_llego" value="instagram" required>
+              <span class="club-check__texto">Instagram</span>
+            </label>
+
+            <label class="club-check">
+              <input class="club-check__input" type="radio" name="como_llego" value="facebook">
+              <span class="club-check__texto">Facebook</span>
+            </label>
+
+            <label class="club-check">
+              <input class="club-check__input" type="radio" name="como_llego" value="google_maps">
+              <span class="club-check__texto">Google Maps</span>
+            </label>
+
+            <label class="club-check">
+              <input class="club-check__input" type="radio" name="como_llego" value="tiktok">
+              <span class="club-check__texto">TikTok</span>
+            </label>
+
+            <label class="club-check">
+              <input class="club-check__input" type="radio" name="como_llego" value="recomendacion">
+              <span class="club-check__texto">Recomendación</span>
+            </label>
+
+            <label class="club-check">
+              <input class="club-check__input" type="radio" name="como_llego" value="otro">
+              <span class="club-check__texto">Otro</span>
+            </label>
+
+            <div class="club-field club-field--extra" data-club="como-llego-otro" hidden>
+              <label class="club-field__label" for="club-como-otro">Contanos cómo (opcional)</label>
+              <input
+                class="club-field__input"
+                id="club-como-otro"
+                name="como_llego_otro"
+                type="text"
+                maxlength="120"
+                aria-describedby="club-como-otro-error"
+              >
+              <p class="club-field__error" id="club-como-otro-error" data-club-error="como_llego_otro" hidden></p>
+            </div>
+
+            <p class="club-field__error" data-club-error="como_llego" hidden></p>
+          </fieldset>
+        </fieldset>
+
+        <!-- CONSENTIMIENTO -->
+        <fieldset class="club-fieldset">
+          <legend class="club-fieldset__legend">Consentimiento</legend>
+
+          <label class="club-check club-check--consentimiento">
+            <input
+              class="club-check__input"
+              type="checkbox"
+              name="consentimiento"
+              required
+              aria-describedby="club-consentimiento-error"
+            >
+            <span class="club-check__texto">
+              <!-- REVISAR TEXTO LEGAL -->
+              Acepto que Tajos use mis datos para gestionar mi tarjeta del Club, informarme sobre promociones y comunicarme por WhatsApp. Conozco la <a href="{{URL_PRIVACIDAD}}" target="_blank" rel="noopener noreferrer">política de privacidad</a>.
+            </span>
+          </label>
+          <p class="club-field__error" id="club-consentimiento-error" data-club-error="consentimiento" hidden></p>
+
+          <p class="club-form__nota">Si sos menor de edad, completá el registro junto a tu madre, padre o tutor.</p>
+        </fieldset>
+
+        <!-- ANTI-SPAM -->
+        <div class="club-honeypot" aria-hidden="true">
+          <label class="club-honeypot__label" for="club-sitio-web">Sitio web</label>
+          <input
+            class="club-honeypot__input"
+            id="club-sitio-web"
+            type="text"
+            name="sitio_web"
+            tabindex="-1"
+            autocomplete="off"
+            data-club="honeypot"
+          >
+        </div>
+
+        <button class="club-btn club-btn--primario" type="submit" data-club="registro-submit">Crear mi tarjeta</button>
+      </form>
+    </section>
+
+    <!-- VISTA: REGISTRO EXITOSO -->
+    <section class="club-exito" data-club="vista-ok" aria-labelledby="club-exito-titulo" hidden>
+      <h2 class="club-exito__titulo" id="club-exito-titulo">¡Bienvenido a Club TAJOS, <span data-club="ok-nombre"></span>!</h2>
+      <p class="club-exito__texto">Ya podés sumar visitas en cada servicio y acceder a los beneficios del Club.</p>
+
+      <div class="club-exito__acciones">
+        <a class="club-btn club-btn--primario" href="tarjeta.html">Ver mi tarjeta</a>
+        <a class="club-btn club-btn--secundario" href="inicio.html">Ir a mi inicio</a>
+      </div>
+
+      <div class="club-exito__guardado">
+        <h3 class="club-exito__subtitulo">Guardá tu tarjeta</h3>
+        <p class="club-exito__texto">Guardá este enlace por si cambiás de celular o borrás los datos del navegador.</p>
+
+        <div class="club-exito__enlace">
+          <input
+            class="club-field__input"
+            type="text"
+            readonly
+            data-club="link-tarjeta"
+            aria-label="Enlace a tu tarjeta"
+          >
+          <button class="club-btn club-btn--secundario" type="button" data-club="copiar-link">Copiar enlace</button>
+        </div>
+
+        <p class="club-exito__estado" role="status" data-club="copiar-estado" hidden>¡Copiado!</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="club-footer">
+    <nav class="club-footer__enlaces" aria-label="Enlaces">
+      <a class="club-footer__enlace" href="{{URL_WEB}}" target="_blank" rel="noopener noreferrer">Ir a tajos.com.py</a>
+      <a class="club-footer__enlace" href="{{URL_INSTAGRAM}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+    <p class="club-footer__legal">© 2026 Tajos. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- PLANTILLA: SERVICIOS -->
+  <template id="tpl-servicio-opcion">
+    <label class="club-check">
+      <input type="checkbox" name="servicios_habituales" value="">
+      <span></span>
+    </label>
+  </template>
+
+</body>
+</html>
