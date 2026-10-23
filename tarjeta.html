@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es-PY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Mi tarjeta · Club Tajos</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="theme-color" content="{{COLOR_THEME}}">
+  <link rel="icon" href="{{RUTA_FAVICON}}">
+
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="stylesheet" href="{{RUTA_CSS}}">
+
+  <script defer src="{{RUTA_JS_CORE}}"></script>
+  <script defer src="{{RUTA_JS_UI}}"></script>
+  <script defer src="{{RUTA_JS_TARJETA}}"></script>
+</head>
+<body data-club-pagina="tarjeta" data-club-requiere-sesion>
+
+  <a class="club-skip" href="#contenido">Saltar al contenido</a>
+
+  <noscript>
+    <p class="club-noscript">Activá JavaScript para ver tu tarjeta.</p>
+  </noscript>
+
+  <!-- HEADER -->
+  <header class="club-header">
+    <a class="club-header__marca" href="inicio.html">
+      <img class="club-header__logo" src="{{RUTA_LOGO}}" alt="Tajos" width="48" height="48">
+      <span class="club-header__nombre">Club Tajos</span>
+    </a>
+
+    <div class="club-header__acciones">
+      <button class="club-btn club-btn--secundario" type="button" data-club="btn-salir">Salir</button>
+    </div>
+  </header>
+
+  <!-- CARGANDO -->
+  <div class="club-cargando" data-club="cargando" role="status">Cargando tu tarjeta…</div>
+
+  <main id="contenido" data-club="contenido-miembro" hidden>
+
+    <!-- ERROR DE CARGA -->
+    <div class="club-error" data-club="error-carga" hidden>
+      <p class="club-error__texto">No pudimos cargar tu tarjeta. Revisá tu conexión e intentá de nuevo.</p>
+      <button class="club-btn club-btn--secundario" type="button" data-club="reintentar">Reintentar</button>
+    </div>
+
+    <h1 class="club-pagina__titulo">Mi tarjeta</h1>
+
+    <!-- TARJETA -->
+    <section class="club-tarjeta" data-club="tarjeta" aria-labelledby="club-tarjeta-titulo">
+      <h2 class="club-visually-hidden" id="club-tarjeta-titulo">Tu tarjeta del Club Tajos</h2>
+
+      <div class="club-tarjeta__cabecera">
+        <img class="club-tarjeta__logo" src="{{RUTA_LOGO}}" alt="" width="48" height="48">
+        <span class="club-tarjeta__marca">Club Tajos</span>
+      </div>
+
+      <p class="club-tarjeta__nombre" data-club="miembro-nombre"></p>
+
+      <!-- SELLOS -->
+      <ol class="club-sellos" data-club="sellos" aria-label="Tus visitas"></ol>
+
+      <div class="club-tarjeta__resumen">
+        <progress class="club-progreso__barra" data-club="miembro-progreso" value="0" max="1" aria-describedby="club-tarjeta-progreso-texto"></progress>
+        <p class="club-progreso__texto" id="club-tarjeta-progreso-texto" data-club="miembro-progreso-texto"></p>
+      </div>
+
+      <div class="club-tarjeta__pie">
+        <p class="club-tarjeta__premio">Tu premio: <strong data-club="premio"></strong></p>
+        <p class="club-tarjeta__faltan">Te faltan <span data-club="visitas-faltan"></span> visitas</p>
+      </div>
+    </section>
+
+    <!-- AVISOS -->
+    <p class="club-aviso club-aviso--destacado" data-club="miembro-premio" hidden>
+      ¡Tenés <span data-club="premios-disponibles"></span> premio(s) disponible(s)! Mostrá esta pantalla en caja para canjearlo.
+    </p>
+
+    <p class="club-aviso" data-club="sin-visitas" hidden>
+      Todavía no registraste visitas. Se suman automáticamente cuando te atendemos.
+    </p>
+
+    <!-- DATOS RÁPIDOS -->
+    <section class="club-resumen" aria-labelledby="club-resumen-titulo">
+      <h2 class="club-titulo" id="club-resumen-titulo">Datos rápidos</h2>
+
+      <dl class="club-datos">
+        <div class="club-datos__item">
+          <dt class="club-datos__termino">Visitas totales</dt>
+          <dd class="club-datos__valor" data-club="visitas-totales"></dd>
+        </div>
+
+        <div class="club-datos__item" data-club="ultima-visita-bloque" hidden>
+          <dt class="club-datos__termino">Última visita</dt>
+          <dd class="club-datos__valor" data-club="ultima-visita"></dd>
+        </div>
+
+        <div class="club-datos__item">
+          <dt class="club-datos__termino">Premios disponibles</dt>
+          <dd class="club-datos__valor" data-club="premios-disponibles"></dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- CÓMO SUMAR VISITAS -->
+    <section class="club-instrucciones" aria-labelledby="club-instrucciones-titulo">
+      <h2 class="club-titulo" id="club-instrucciones-titulo">Cómo sumar visitas</h2>
+
+      <ol class="club-pasos">
+        <li class="club-paso">
+          <p class="club-paso__texto">Cada vez que te atendemos se suma una visita, automáticamente, con tu número de WhatsApp.</p>
+        </li>
+        <li class="club-paso">
+          <p class="club-paso__texto">Al completar <span data-club="visitas-requeridas">varias</span> visitas ganás <span data-club="premio">un premio especial</span>.</p>
+        </li>
+        <li class="club-paso">
+          <p class="club-paso__texto">Canjealo en caja mostrando esta pantalla.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <section class="club-faq" aria-labelledby="club-faq-titulo">
+      <h2 class="club-titulo" id="club-faq-titulo">Preguntas frecuentes</h2>
+
+      <details class="club-faq__item">
+        <summary class="club-faq__pregunta">Hice un servicio y no se sumó mi visita</summary>
+        <p class="club-faq__respuesta">Avisanos en caja y lo revisamos.</p>
+      </details>
+
+      <details class="club-faq__item">
+        <summary class="club-faq__pregunta">Cambié de número de WhatsApp</summary>
+        <p class="club-faq__respuesta">Consultá en el local para actualizarlo.</p>
+      </details>
+
+      <details class="club-faq__item">
+        <summary class="club-faq__pregunta">Cambié de celular</summary>
+        <p class="club-faq__respuesta">
+          Usá tu enlace guardado o <a href="index.html">ingresá desde la página principal</a> con tu WhatsApp y tu fecha de nacimiento.
+        </p>
+      </details>
+    </section>
+
+    <!-- GUARDAR TARJETA -->
+    <section class="club-guardado" aria-labelledby="club-guardado-titulo">
+      <h2 class="club-titulo" id="club-guardado-titulo">Guardá tu tarjeta</h2>
+      <p class="club-guardado__texto">Guardá este enlace por si cambiás de celular o borrás los datos del navegador.</p>
+
+      <div class="club-guardado__enlace">
+        <input
+          class="club-field__input"
+          type="text"
+          readonly
+          data-club="link-tarjeta"
+          aria-label="Enlace a tu tarjeta"
+        >
+        <button class="club-btn club-btn--secundario" type="button" data-club="copiar-link">Copiar enlace</button>
+      </div>
+
+      <p class="club-guardado__estado" role="status" data-club="copiar-estado" hidden>¡Copiado!</p>
+    </section>
+
+    <a class="club-enlace-secundario" href="inicio.html#novedades">Ver novedades y promociones</a>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="club-footer">
+    <nav class="club-footer__enlaces" aria-label="Enlaces">
+      <a class="club-footer__enlace" href="{{URL_WEB}}" target="_blank" rel="noopener noreferrer">Ir a tajos.com.py</a>
+      <a class="club-footer__enlace" href="{{URL_INSTAGRAM}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+    <p class="club-footer__legal">© 2026 Tajos. Todos los derechos reservados.</p>
+    <p>Desarrollado por AwterSpacer Dev Ops.</p>
+  
+  </footer>
+
+  <!-- BARRA INFERIOR -->
+  <nav class="club-tabbar" aria-label="Navegación principal" data-club="tabbar">
+    <a class="club-tabbar__item" href="inicio.html">
+      <svg class="club-tabbar__icono" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3l9 8h-3v9h-4v-6H10v6H6v-9H3l9-8Z"/>
+      </svg>
+      <span class="club-tabbar__texto">Inicio</span>
+    </a>
+
+    <a class="club-tabbar__item" href="tarjeta.html" aria-current="page">
+      <svg class="club-tabbar__icono" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18v12H3V6Zm2 4h6v2H5v-2Zm0 4h10v2H5v-2Z"/>
+      </svg>
+      <span class="club-tabbar__texto">Mi tarjeta</span>
+    </a>
+
+    <a class="club-tabbar__item" href="{{URL_AGENDAR}}" target="_blank" rel="noopener noreferrer" data-club="agendar">
+      <svg class="club-tabbar__icono" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm12 8v9H5v-9h14Z"/>
+      </svg>
+      <span class="club-tabbar__texto">Agendar</span>
+    </a>
+
+    <a class="club-tabbar__item" href="inicio.html#donde-estamos">
+      <svg class="club-tabbar__icono" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7Zm0 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+      </svg>
+      <span class="club-tabbar__texto">Cómo llegar</span>
+    </a>
+  </nav>
+
+  <!-- PLANTILLA: SELLO -->
+  <template id="tpl-sello">
+    <li class="club-sello" data-club="sello" data-estado="pendiente">
+      <span class="club-sello__marca" aria-hidden="true"></span>
+      <span class="club-visually-hidden" data-club="sello-texto"></span>
+    </li>
+  </template>
+
+</body>
+</html>
