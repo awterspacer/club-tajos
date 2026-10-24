@@ -12,36 +12,16 @@
   var ui = TajosClub.ui;
   var session = TajosClub.session;
 
-  var INTERVALO_ACTUALIZACION = 60000;
-  var ultimaCargaCorrecta = 0;
-  var actualizando = false;
   var modoDegradado = false;
   var contenidoVisible = false;
   var promocionesListas = false;
   var estadoListo = false;
 
-  function marcarListo(elemento) {
-    if (elemento) {
-      elemento.setAttribute('data-club-listo', '');
-    }
-  }
-
-  function yaListo(elemento) {
-    return Boolean(elemento && elemento.hasAttribute('data-club-listo'));
-  }
-
-  function irAIndex() {
-    global.location.replace('index.html');
-  }
-
   function activarModoDegradado() {
     modoDegradado = true;
 
-    var saludo = dom.hook('saludo');
-    var progreso = dom.hook('progreso');
-
-    dom.hide(saludo);
-    dom.hide(progreso);
+    dom.hide(dom.hook('saludo'));
+    dom.hide(dom.hook('progreso'));
 
     return ui.mostrarContenidoMiembro().then(function () {
       contenidoVisible = true;
@@ -56,53 +36,40 @@
     }
 
     modoDegradado = false;
-
     dom.show(dom.hook('saludo'));
     dom.show(dom.hook('progreso'));
   }
 
-  function cargarEstado() {
-    if (actualizando) {
+  function alCargarEstado(estado) {
+    restaurarModoCompleto();
+    ui.renderMiembro(estado);
+
+    if (!contenidoVisible) {
+      return ui.mostrarContenidoMiembro().then(function () {
+        contenidoVisible = true;
+        estadoListo = true;
+        ui.motion.observar(dom.hook('contenido-miembro'));
+        intentarAncla();
+      });
+    }
+
+    estadoListo = true;
+    ui.motion.observar(dom.hook('contenido-miembro'));
+  }
+
+  function alErrorEstado() {
+    var errorCarga = dom.hook('error-carga');
+
+    if (errorCarga) {
+      ui.mostrarErrorCarga(observador.recargar);
       return;
     }
 
-    actualizando = true;
+    activarModoDegradado();
+  }
 
-    return session.cargarEstado().then(function (respuesta) {
-      actualizando = false;
-
-      if (respuesta.ok) {
-        ultimaCargaCorrecta = Date.now();
-        restaurarModoCompleto();
-        ui.renderMiembro(respuesta.data);
-
-        if (!contenidoVisible) {
-          return ui.mostrarContenidoMiembro().then(function () {
-            contenidoVisible = true;
-            estadoListo = true;
-            ui.motion.observar(dom.hook('contenido-miembro'));
-            intentarAncla();
-          });
-        }
-
-        estadoListo = true;
-        return;
-      }
-
-      if (respuesta.error === 'token_invalido') {
-        irAIndex();
-        return;
-      }
-
-      var errorCarga = dom.hook('error-carga');
-
-      if (errorCarga) {
-        ui.mostrarErrorCarga(cargarEstado);
-        return;
-      }
-
-      return activarModoDegradado();
-    });
+  function alRecuperarRed() {
+    /* El usuario decide reintentar si hay un error visible. */
   }
 
   function cargarPromociones() {
@@ -131,7 +98,7 @@
       return;
     }
 
-    var comportamiento = ui.motion && ui.motion.nivel === 'minimo' ? 'auto' : 'smooth';
+    var comportamiento = ui.motion.nivel === 'minimo' ? 'auto' : 'smooth';
 
     destino.scrollIntoView({
       behavior: comportamiento,
@@ -144,61 +111,6 @@
     global.setTimeout(function () {
       destino.removeAttribute('tabindex');
     }, 0);
-  }
-
-  function actualizarSilenciosamente() {
-    if (actualizando || !session.hasToken()) {
-      return;
-    }
-
-    if (Date.now() - ultimaCargaCorrecta < INTERVALO_ACTUALIZACION) {
-      return;
-    }
-
-    actualizando = true;
-
-    session.cargarEstado().then(function (respuesta) {
-      actualizando = false;
-
-      if (respuesta.ok) {
-        ultimaCargaCorrecta = Date.now();
-        restaurarModoCompleto();
-        ui.renderMiembro(respuesta.data);
-        ui.motion.observar(dom.hook('contenido-miembro'));
-        return;
-      }
-
-      if (respuesta.error === 'token_invalido') {
-        irAIndex();
-      }
-
-      /* Otros errores se ignoran en silencio. */
-    });
-  }
-
-  function debeActualizar() {
-    return document.visibilityState === 'visible' && session.hasToken();
-  }
-
-  function enlazarActualizacion() {
-    global.document.addEventListener('visibilitychange', function () {
-      if (debeActualizar()) {
-        actualizarSilenciosamente();
-      }
-    });
-
-    global.addEventListener('online', function () {
-      if (debeActualizar()) {
-        actualizarSilenciosamente();
-      }
-    });
-
-    global.addEventListener('pageshow', function (evento) {
-      if (evento.persisted && session.hasToken()) {
-        ultimaCargaCorrecta = 0;
-        actualizarSilenciosamente();
-      }
-    });
   }
 
   function iniciar() {
@@ -219,14 +131,21 @@
         return;
       }
 
-      enlazarActualizacion();
+      observador = ui.sesionObservar({
+        intervaloMs: 60000,
+        alCargar: alCargarEstado,
+        alError: alErrorEstado,
+        alRecuperarRed: alRecuperarRed
+      });
 
-      cargarEstado();
+      observador.recargar();
       cargarPromociones();
     } catch (error) {
       /* La página permanece utilizable. */
     }
   }
+
+  var observador = null;
 
   dom.ready(iniciar);
 })(window);
