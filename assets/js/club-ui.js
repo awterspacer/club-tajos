@@ -15,7 +15,6 @@
   var session = TajosClub.session;
 
   var ui = TajosClub.ui || {};
-  var existingMotion = ui.motion || {};
 
   var SELECTORES_REVELADO = [
     'main > section',
@@ -81,7 +80,6 @@
   function leerDuracion(nombreVariable, respaldo) {
     var valor = '';
     var numero = 0;
-    var unidad = '';
 
     try {
       valor = global
@@ -98,14 +96,11 @@
     }
 
     if (valor.indexOf('ms') !== -1) {
-      unidad = 'ms';
       numero = parseFloat(valor);
     } else if (valor.indexOf('s') !== -1) {
-      unidad = 's';
       numero = parseFloat(valor) * 1000;
     } else {
       numero = parseFloat(valor);
-      unidad = 'ms';
     }
 
     if (!isFinite(numero) || numero < 0) {
@@ -131,17 +126,9 @@
     return Boolean(elemento && elemento.hasAttribute('data-club-listo'));
   }
 
-  /**
-   * Capa de movimiento compartida.
-   */
   var motion = {
     nivel: 'completo',
 
-    /**
-     * Devuelve la duración configurada para un tipo de movimiento.
-     * @param {string} nombre 'control' | 'reveal' | 'vista'.
-     * @returns {number} Duración en milisegundos.
-     */
     dur: function (nombre) {
       if (motion.nivel === 'minimo') {
         return 0;
@@ -160,10 +147,6 @@
       return 0;
     },
 
-    /**
-     * Registra bloques para revelarlos al entrar en pantalla.
-     * @param {ParentNode} [raiz] Raíz opcional de búsqueda.
-     */
     observar: function (raiz) {
       var contenedor = raiz || global.document;
       var objetivos = [];
@@ -217,13 +200,6 @@
       escalonarGrupos(contenedor);
     },
 
-    /**
-     * Transiciona entre dos bloques de vista.
-     * @param {Element|null} salir Elemento que sale.
-     * @param {Element|null} entrar Elemento que entra.
-     * @param {{foco?: boolean}} [opciones] Opciones de transición.
-     * @returns {Promise<void>}
-     */
     cambiarVista: function (salir, entrar, opciones) {
       var configuracion = opciones || {};
       var duracion = motion.dur('vista');
@@ -268,11 +244,6 @@
       });
     },
 
-    /**
-     * Muestra u oculta un campo condicional.
-     * @param {Element|null} elemento Campo a controlar.
-     * @param {boolean} visible Indica si debe verse.
-     */
     revelarCampo: function (elemento, visible) {
       if (!elemento) {
         return;
@@ -286,19 +257,11 @@
 
       elemento.setAttribute('data-estado', 'oculto');
 
-      var duracion = motion.dur('control');
-
       global.setTimeout(function () {
         dom.hide(elemento);
-      }, duracion);
+      }, motion.dur('control'));
     },
 
-    /**
-     * Actualiza una barra de progreso con su valor real.
-     * @param {Element|null} progressEl Elemento progress.
-     * @param {number} valor Valor actual.
-     * @param {number} max Valor máximo.
-     */
     progreso: function (progressEl, valor, max) {
       if (!progressEl) {
         return;
@@ -361,10 +324,6 @@
     }, 0);
   }
 
-  /**
-   * Inicializa los componentes de interfaz compartidos.
-   * @returns {void}
-   */
   ui.init = function () {
     aplicarNivel();
 
@@ -372,9 +331,7 @@
 
     motion.observar(global.document);
 
-    var botonesSalir = dom.hooks('btn-salir');
-
-    botonesSalir.forEach(function (boton) {
+    dom.hooks('btn-salir').forEach(function (boton) {
       if (yaListo(boton)) {
         return;
       }
@@ -405,18 +362,10 @@
     }
   };
 
-  /**
-   * Punto de extensión para comportamientos de agendamiento.
-   */
   ui.hooks = {
     alAgendar: function () {}
   };
 
-  /**
-   * Alterna la interfaz entre visitante y miembro.
-   * @param {'publico'|'miembro'} modo Modo de sesión.
-   * @param {Object|null} estado Estado de la tarjeta del miembro.
-   */
   ui.setModoSesion = function (modo, estado) {
     var publico = dom.hook('hero-publico');
     var miembro = dom.hook('hero-miembro');
@@ -444,11 +393,6 @@
     motion.cambiarVista(miembro, publico, { foco: false });
   };
 
-  /**
-   * Rellena los datos del miembro en la página actual.
-   * @param {Object|null} estado Estado devuelto por estado_tarjeta.
-   * @param {ParentNode} [raiz] Raíz opcional.
-   */
   ui.renderMiembro = function (estado, raiz) {
     var contenedor = raiz || global.document;
     var datos = estado || {};
@@ -544,10 +488,6 @@
     }
   };
 
-  /**
-   * Genera los sellos de la tarjeta de fidelidad.
-   * @param {Object|null} estado Estado de la tarjeta.
-   */
   ui.renderSellos = function (estado) {
     var contenedor = dom.hook('sellos');
     var plantilla = global.document.getElementById('tpl-sello');
@@ -610,11 +550,6 @@
     }
   }
 
-  /**
-   * Renderiza promociones y contenido por tipo.
-   * @param {Array} items Promociones vigentes.
-   * @returns {{total: number, porTipo: Object}}
-   */
   ui.renderPromociones = function (items) {
     var plantilla = global.document.getElementById('tpl-promo-card');
     var porTipo = { novedad: [], promocion: [], descuento: [], evento: [] };
@@ -780,10 +715,6 @@
     });
   }
 
-  /**
-   * Inicializa el diálogo de ingreso.
-   * @param {{destino?: string}} [opciones] Destino luego de ingresar.
-   */
   ui.initLogin = function (opciones) {
     var configuracion = opciones || {};
     var destino = configuracion.destino || 'inicio.html';
@@ -852,8 +783,6 @@
   }
 
   function cerrarDialogo(dialogo) {
-    var duracion = motion.dur('control');
-
     dialogo.setAttribute('data-estado', 'cerrando');
 
     global.clearTimeout(temporizadorDialogo);
@@ -871,7 +800,7 @@
         disparadorDialogo.focus();
         disparadorDialogo = null;
       }
-    }, duracion);
+    }, motion.dur('control'));
   }
 
   function activarTrampaFoco(dialogo) {
@@ -949,12 +878,6 @@
     });
   }
 
-  /**
-   * Marca o desmarca el estado de carga de un botón.
-   * @param {Element|null} boton Botón a controlar.
-   * @param {boolean} activo Indica si está cargando.
-   * @param {string} [textoActivo] Texto mientras carga.
-   */
   ui.setCargando = function (boton, activo, textoActivo) {
     if (!boton) {
       return;
@@ -982,11 +905,6 @@
     }
   };
 
-  /**
-   * Muestra el error de un campo del formulario.
-   * @param {string} nombre Nombre del campo.
-   * @param {string} mensaje Mensaje de error.
-   */
   ui.setErrorCampo = function (nombre, mensaje) {
     var campo = global.document.querySelector('[name="' + nombre + '"]');
     var error = dom.hookError(nombre);
@@ -1021,10 +939,6 @@
     }
   };
 
-  /**
-   * Limpia los errores de un formulario.
-   * @param {HTMLFormElement|null} formulario Formulario a limpiar.
-   */
   ui.limpiarErrores = function (formulario) {
     if (!formulario) {
       return;
@@ -1046,10 +960,6 @@
     ui.mostrarErrorGeneral('');
   };
 
-  /**
-   * Muestra u oculta el error general del formulario.
-   * @param {string} mensaje Mensaje de error.
-   */
   ui.mostrarErrorGeneral = function (mensaje) {
     var error = dom.hook('form-error');
 
@@ -1066,9 +976,6 @@
     }
   };
 
-  /**
-   * Inicializa el bloque para guardar y copiar el enlace de tarjeta.
-   */
   ui.initEnlaceTarjeta = function () {
     var entrada = dom.hook('link-tarjeta');
     var boton = dom.hook('copiar-link');
@@ -1106,10 +1013,6 @@
     marcarListo(boton);
   };
 
-  /**
-   * Muestra el contenido privado luego de validar la sesión.
-   * @returns {Promise<void>}
-   */
   ui.mostrarContenidoMiembro = function () {
     var cargando = dom.hook('cargando');
     var contenido = dom.hook('contenido-miembro');
@@ -1117,10 +1020,6 @@
     return motion.cambiarVista(cargando, contenido, { foco: false });
   };
 
-  /**
-   * Muestra el error de carga con opción de reintento.
-   * @param {Function} [alReintentar] Función a ejecutar al reintentar.
-   */
   ui.mostrarErrorCarga = function (alReintentar) {
     var cargando = dom.hook('cargando');
     var contenido = dom.hook('contenido-miembro');
@@ -1145,6 +1044,99 @@
       });
       marcarListo(boton);
     }
+  };
+
+  /**
+   * Observa sesión y estado en páginas privadas.
+   * @param {Object} opciones Configuración del observador.
+   * @returns {Object} Control con recargar() y forzarActualizacion().
+   */
+  ui.sesionObservar = function (opciones) {
+    var configuracion = opciones || {};
+    var intervalo = typeof configuracion.intervaloMs === 'number' && configuracion.intervaloMs > 0
+      ? configuracion.intervaloMs
+      : 60000;
+
+    var ultimaCargaCorrecta = 0;
+    var actualizando = false;
+    var enCurso = null;
+
+    function redirigir() {
+      global.location.replace('index.html');
+    }
+
+    function cargar(forzar) {
+      if (actualizando || !session.hasToken()) {
+        return enCurso || Promise.resolve(null);
+      }
+
+      if (!forzar && Date.now() - ultimaCargaCorrecta < intervalo) {
+        return enCurso || Promise.resolve(null);
+      }
+
+      actualizando = true;
+
+      enCurso = session.cargarEstado().then(function (respuesta) {
+        actualizando = false;
+        enCurso = null;
+
+        if (respuesta.ok) {
+          ultimaCargaCorrecta = Date.now();
+
+          if (typeof configuracion.alCargar === 'function') {
+            configuracion.alCargar(respuesta.data);
+          }
+
+          return respuesta;
+        }
+
+        if (respuesta.error === 'token_invalido') {
+          redirigir();
+          return respuesta;
+        }
+
+        if (typeof configuracion.alError === 'function') {
+          configuracion.alError(respuesta.error);
+        }
+
+        return respuesta;
+      });
+
+      return enCurso;
+    }
+
+    function enlazar() {
+      global.document.addEventListener('visibilitychange', function () {
+        if (global.document.visibilityState === 'visible' && session.hasToken()) {
+          cargar(false);
+        }
+      });
+
+      global.addEventListener('online', function () {
+        if (session.hasToken() && typeof configuracion.alRecuperarRed === 'function') {
+          configuracion.alRecuperarRed();
+        }
+      });
+
+      global.addEventListener('pageshow', function (evento) {
+        if (evento.persisted && session.hasToken()) {
+          ultimaCargaCorrecta = 0;
+          cargar(true);
+        }
+      });
+    }
+
+    enlazar();
+
+    return {
+      recargar: function () {
+        return cargar(false);
+      },
+      forzarActualizacion: function () {
+        ultimaCargaCorrecta = 0;
+        return cargar(true);
+      }
+    };
   };
 
   ui.motion = motion;
