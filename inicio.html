@@ -42,6 +42,11 @@
   <div class="club-cargando" data-club="cargando" role="status">Cargando tu tarjeta…</div>
 
   <main id="contenido" data-club="contenido-miembro" hidden>
+    <div class="club-error" data-club="error-carga" hidden>
+      <p class="club-error__texto">No pudimos cargar tu tarjeta. Revisá tu conexión e intentá de nuevo.</p>
+      <button class="club-btn club-btn--secundario" type="button" data-club="reintentar">Reintentar</button>
+    </div>
+
 
     <!-- SALUDO -->
     <section class="club-saludo" data-club="saludo" aria-labelledby="club-saludo-titulo">
