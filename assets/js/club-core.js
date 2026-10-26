@@ -6,8 +6,8 @@
 
   // === CONFIGURAR ===
   var CONFIG = {
-    SUPABASE_URL: '{{SUPABASE_URL}}',
-    SUPABASE_ANON_KEY: '{{SUPABASE_ANON_KEY}}',
+    SUPABASE_URL: 'https://pjurqptnruvzsbsqrtsh.supabase.co',
+    SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBqdXJxcHRucnV2enNic3FydHNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3ODY5MjIsImV4cCI6MjEwODM2MjkyMn0.rxjWj9kuYsUyY4dH5pVunkJw_EZ4QXHGRzQYjVqP2bc',
     TOKEN_KEY: 'tajos_club_token',
     TOKEN_REGEX: /^[a-f0-9]{32}$/,
     TIMEOUT_MS: 8000,
