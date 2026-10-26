@@ -117,8 +117,8 @@
 
 :root {
   /* Tipografía */
-  --club-fuente-titulos: "Six Caps", system-ui, sans-serif;
-  --club-fuente-texto: "Michroma", system-ui, sans-serif;
+  --club-fuente-titulos: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --club-fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --club-fuente-marca: "Gajraj One", system-ui, sans-serif;
 
   /* Escala tipográfica */
