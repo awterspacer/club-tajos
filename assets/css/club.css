@@ -374,7 +374,7 @@ section {
   padding: 0.7rem 1.15rem;
   border: var(--club-borde-fino) solid transparent;
   border-radius: var(--club-radio-completo);
-  font-family: var(--club-fuente-titulos);
+  font-family: var(--club-fuente-texto);
   font-weight: 650;
   font-size: var(--club-texto-s);
   text-align: center;
@@ -1004,7 +1004,7 @@ section {
 
 .club-fieldset__legend {
   padding: 0 var(--club-espacio-2);
-  font-family: var(--club-fuente-titulos);
+  font-family: var(--club-fuente-texto);
   font-weight: 750;
   font-size: var(--club-texto-s);
 }
