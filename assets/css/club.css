@@ -117,8 +117,9 @@
 
 :root {
   /* Tipografía */
-  --club-fuente-titulos: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --club-fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --club-fuente-titulos: "Six Caps", system-ui, sans-serif;
+  --club-fuente-texto: "Michroma", system-ui, sans-serif;
+  --club-fuente-marca: "Gajraj One", system-ui, sans-serif;
 
   /* Escala tipográfica */
   --club-texto-xs: clamp(0.78rem, 0.74rem + 0.2vw, 0.85rem);
@@ -352,7 +353,7 @@ section {
 }
 
 .club-header__nombre {
-  font-family: var(--club-fuente-titulos);
+  font-family: var(--club-fuente-marca);
   font-weight: 700;
   font-size: var(--club-texto-m);
   letter-spacing: -0.01em;
@@ -1312,7 +1313,7 @@ section {
 }
 
 .club-tarjeta__marca {
-  font-family: var(--club-fuente-titulos);
+  font-family: var(--club-fuente-marca);
   font-weight: 750;
   letter-spacing: 0.02em;
   text-transform: uppercase;
