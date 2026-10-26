@@ -128,6 +128,8 @@
   --club-texto-l: clamp(1.25rem, 1.1rem + 0.7vw, 1.6rem);
   --club-texto-xl: clamp(1.7rem, 1.3rem + 2vw, 2.7rem);
   --club-texto-xxl: clamp(2.2rem, 1.5rem + 3.4vw, 3.6rem);
+  --club-texto-hero: clamp(4rem, 2.5rem + 10vw, 9rem);
+
 
   /* Espaciado y forma */
   --club-espacio-1: 0.25rem;
@@ -1713,3 +1715,13 @@ html[data-motion="minimo"] [data-reveal="pendiente"] {
     padding-bottom: var(--club-espacio-8);
   }
 }
+
+/* Hero editorial con Six Caps gigante */
+.club-hero__titulo {
+  font-size: var(--club-texto-hero);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  max-width: 12ch;
+}
+
