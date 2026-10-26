@@ -18,55 +18,55 @@
 
 :root {
   /* Paleta base */
-  --club-paleta-carbon: #101214;
-  --club-paleta-marfil: #F4F4F1;
-  --club-paleta-nube: #C9D4DE;
-  --club-paleta-pizarra: #777F87;
-  --club-paleta-niebla: #DDE4E8;
-  --club-paleta-grafito: #30363D;
+  --club-paleta-carbon: #014BAA;
+  --club-paleta-marfil: #F8F3F0;
+  --club-paleta-nube: #014BAA;
+  --club-paleta-pizarra: #5A6B7C;
+  --club-paleta-niebla: #E8E2DE;
+  --club-paleta-grafito: #013A85;
 
   /* Tokens semánticos · tema claro */
   --club-fondo: var(--club-paleta-marfil);
   --club-superficie: #FFFFFF;
   --club-superficie-alta: var(--club-paleta-niebla);
-  --club-texto: var(--club-paleta-carbon);
-  --club-texto-suave: #4A5158;
-  --club-borde: #C7CDD2;
-  --club-borde-fuerte: var(--club-paleta-grafito);
-  --club-acento: #5C7A94;
-  --club-acento-texto: #FFFFFF;
-  --club-foco: #2F5D80;
-  --club-error: #9B2C2C;
-  --club-error-superficie: #FBEDED;
-  --club-exito: #2F6B4F;
-  --club-premio: #2F5D80;
-  --club-premio-superficie: #E7EEF4;
+  --club-texto: #013A85;
+  --club-texto-suave: #43536A;
+  --club-borde: #D8D0CB;
+  --club-borde-fuerte: #014BAA;
+  --club-acento: #014BAA;
+  --club-acento-texto: #F8F3F0;
+  --club-foco: #014BAA;
+  --club-error: #A32323;
+  --club-error-superficie: #FBECEC;
+  --club-exito: #1F6B4A;
+  --club-premio: #014BAA;
+  --club-premio-superficie: #E4EDF8;
   --club-sombra-1: 0 1px 2px rgba(16, 18, 20, 0.06);
   --club-sombra-2: 0 6px 18px rgba(16, 18, 20, 0.08);
   --club-sombra-3: 0 16px 40px rgba(16, 18, 20, 0.12);
-  --club-atmosfera-1: rgba(201, 212, 222, 0.38);
-  --club-atmosfera-2: rgba(221, 228, 232, 0.55);
+  --club-atmosfera-1: transparent;
+  --club-atmosfera-2: transparent;
 
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --club-fondo: var(--club-paleta-carbon);
-    --club-superficie: #191D21;
-    --club-superficie-alta: #22282D;
-    --club-texto: #F2F4F5;
-    --club-texto-suave: #B9C1C8;
-    --club-borde: #3A4249;
-    --club-borde-fuerte: #DDE4E8;
-    --club-acento: #A9C4D8;
-    --club-acento-texto: #101214;
-    --club-foco: #C9D4DE;
-    --club-error: #F1A7A7;
-    --club-error-superficie: #3A2426;
-    --club-exito: #9BD4B6;
-    --club-premio: #C9D4DE;
-    --club-premio-superficie: #222A31;
+    --club-fondo: #013A85;
+    --club-superficie: #014BAA;
+    --club-superficie-alta: #0356BF;
+    --club-texto: #F8F3F0;
+    --club-texto-suave: #D6DCE4;
+    --club-borde: #2E6AC4;
+    --club-borde-fuerte: #F8F3F0;
+    --club-acento: #F8F3F0;
+    --club-acento-texto: #014BAA;
+    --club-foco: #F8F3F0;
+    --club-error: #FFB4B4;
+    --club-error-superficie: #7A1F1F;
+    --club-exito: #A5E1C3;
+    --club-premio: #F8F3F0;
+    --club-premio-superficie: #0356BF;
     --club-sombra-1: 0 1px 2px rgba(0, 0, 0, 0.35);
     --club-sombra-2: 0 6px 18px rgba(0, 0, 0, 0.35);
     --club-sombra-3: 0 16px 40px rgba(0, 0, 0, 0.45);
@@ -81,37 +81,37 @@
   --club-fondo: var(--club-paleta-marfil);
   --club-superficie: #FFFFFF;
   --club-superficie-alta: var(--club-paleta-niebla);
-  --club-texto: var(--club-paleta-carbon);
-  --club-texto-suave: #4A5158;
-  --club-borde: #C7CDD2;
-  --club-borde-fuerte: var(--club-paleta-grafito);
-  --club-acento: #5C7A94;
-  --club-acento-texto: #FFFFFF;
-  --club-foco: #2F5D80;
-  --club-error: #9B2C2C;
-  --club-error-superficie: #FBEDED;
-  --club-exito: #2F6B4F;
-  --club-premio: #2F5D80;
-  --club-premio-superficie: #E7EEF4;
+  --club-texto: #013A85;
+  --club-texto-suave: #43536A;
+  --club-borde: #D8D0CB;
+  --club-borde-fuerte: #014BAA;
+  --club-acento: #014BAA;
+  --club-acento-texto: #F8F3F0;
+  --club-foco: #014BAA;
+  --club-error: #A32323;
+  --club-error-superficie: #FBECEC;
+  --club-exito: #1F6B4A;
+  --club-premio: #014BAA;
+  --club-premio-superficie: #E4EDF8;
   color-scheme: light;
 }
 
 :root[data-tema="oscuro"] {
-  --club-fondo: var(--club-paleta-carbon);
-  --club-superficie: #191D21;
-  --club-superficie-alta: #22282D;
-  --club-texto: #F2F4F5;
-  --club-texto-suave: #B9C1C8;
-  --club-borde: #3A4249;
-  --club-borde-fuerte: #DDE4E8;
-  --club-acento: #A9C4D8;
-  --club-acento-texto: #101214;
-  --club-foco: #C9D4DE;
-  --club-error: #F1A7A7;
-  --club-error-superficie: #3A2426;
-  --club-exito: #9BD4B6;
-  --club-premio: #C9D4DE;
-  --club-premio-superficie: #222A31;
+  --club-fondo: #013A85;
+  --club-superficie: #014BAA;
+  --club-superficie-alta: #0356BF;
+  --club-texto: #F8F3F0;
+  --club-texto-suave: #D6DCE4;
+  --club-borde: #2E6AC4;
+  --club-borde-fuerte: #F8F3F0;
+  --club-acento: #F8F3F0;
+  --club-acento-texto: #014BAA;
+  --club-foco: #F8F3F0;
+  --club-error: #FFB4B4;
+  --club-error-superficie: #7A1F1F;
+  --club-exito: #A5E1C3;
+  --club-premio: #F8F3F0;
+  --club-premio-superficie: #0356BF;
   color-scheme: dark;
 }
 
@@ -197,10 +197,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background-color: var(--club-fondo);
-  background-image:
-    radial-gradient(58rem 34rem at 12% -8%, var(--club-atmosfera-1), transparent 70%),
-    radial-gradient(48rem 30rem at 96% 8%, var(--club-atmosfera-2), transparent 72%);
-  background-repeat: no-repeat;
+  background-image: none;
   color: var(--club-texto);
   font-family: var(--club-fuente-texto);
   font-size: var(--club-texto-m);
@@ -326,13 +323,13 @@ section {
   gap: var(--club-espacio-3);
   min-height: calc(68px + var(--club-safe-top));
   padding: var(--club-safe-top) var(--club-espacio-4) var(--club-espacio-2);
-  background: color-mix(in srgb, var(--club-fondo) 88%, transparent);
+  background: var(--club-fondo);
   border-bottom: var(--club-borde-fino) solid var(--club-borde);
 }
 
 @supports (backdrop-filter: blur(8px)) {
   .club-header {
-    background: color-mix(in srgb, var(--club-fondo) 72%, transparent);
+    background: var(--club-fondo);
     backdrop-filter: blur(10px) saturate(1.1);
   }
 }
@@ -392,9 +389,9 @@ section {
 }
 
 .club-btn--primario {
-  background: var(--club-texto);
-  color: var(--club-fondo);
-  border-color: var(--club-texto);
+  background: var(--club-acento);
+  color: var(--club-acento-texto);
+  border-color: var(--club-acento);
 }
 
 .club-btn--primario:hover {
