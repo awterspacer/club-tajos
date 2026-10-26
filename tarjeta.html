@@ -7,8 +7,8 @@
   <title>Mi tarjeta · Club Tajos</title>
   <meta name="robots" content="noindex, nofollow">
 
-  <meta name="theme-color" content="{{COLOR_THEME}}">
-  <link rel="icon" href="{{RUTA_FAVICON}}">
+  <meta name="theme-color" content="#014BAA">
+  <link rel="icon" href="assets/img/favicon.png">
 
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
@@ -16,11 +16,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gajraj+One&family=Six+Caps&family=Michroma&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="{{RUTA_CSS}}">
+  <link rel="stylesheet" href="assets/css/club.css">
 
-  <script defer src="{{RUTA_JS_CORE}}"></script>
-  <script defer src="{{RUTA_JS_UI}}"></script>
-  <script defer src="{{RUTA_JS_TARJETA}}"></script>
+  <script defer src="assets/js/club-core.js"></script>
+  <script defer src="assets/js/club-ui.js"></script>
+  <script defer src="assets/js/tarjeta.js"></script>
 </head>
 <body data-club-pagina="tarjeta" data-club-requiere-sesion>
 
@@ -33,8 +33,8 @@
   <!-- HEADER -->
   <header class="club-header">
     <a class="club-header__marca" href="inicio.html">
-      <img class="club-header__logo" src="{{RUTA_LOGO}}" alt="Tajos" width="48" height="48">
-      <span class="club-header__nombre">Club Tajos</span>
+      <img class="club-header__logo" src="assets/img/logo.png" alt="Tajos" width="48" height="48">
+      <span class="club-header__nombre">CLUB TAJOS</span>
     </a>
 
     <div class="club-header__acciones">
@@ -60,8 +60,8 @@
       <h2 class="club-visually-hidden" id="club-tarjeta-titulo">Tu tarjeta del Club Tajos</h2>
 
       <div class="club-tarjeta__cabecera">
-        <img class="club-tarjeta__logo" src="{{RUTA_LOGO}}" alt="" width="48" height="48">
-        <span class="club-tarjeta__marca">Club Tajos</span>
+        <img class="club-tarjeta__logo" src="assets/img/logo.png" alt="" width="48" height="48">
+        <span class="club-tarjeta__marca">CLUB TAJOS</span>
       </div>
 
       <p class="club-tarjeta__nombre" data-club="miembro-nombre"></p>
@@ -176,11 +176,10 @@
   <!-- FOOTER -->
   <footer class="club-footer">
     <nav class="club-footer__enlaces" aria-label="Enlaces">
-      <a class="club-footer__enlace" href="{{URL_WEB}}" target="_blank" rel="noopener noreferrer">Ir a tajos.com.py</a>
-      <a class="club-footer__enlace" href="{{URL_INSTAGRAM}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a class="club-footer__enlace" href="https://www.tajos.com.py" target="_blank" rel="noopener noreferrer">Ir a tajos.com.py</a>
+      <a class="club-footer__enlace" href="https://www.instagram.com/tajosbarberos" target="_blank" rel="noopener noreferrer">Instagram</a>
     </nav>
-    <p class="club-footer__legal">© 2026 Tajos. Todos los derechos reservados.</p>
-    <p>Desarrollado por AwterSpacer Dev Ops.</p>
+    <p class="club-footer__legal">© 2026 Tajos. Todos los derechos reservados. Desarrollado por AwterSpacer Dev Ops. </p>
   
   </footer>
 
@@ -200,7 +199,7 @@
       <span class="club-tabbar__texto">Mi tarjeta</span>
     </a>
 
-    <a class="club-tabbar__item" href="{{URL_AGENDAR}}" target="_blank" rel="noopener noreferrer" data-club="agendar">
+    <a class="club-tabbar__item" href="https://wa.me/595982473078?text=Hola%21%20Soy%20MIEMBRO%20DEL%20CLUB%20TAJOS%20y%20quisiera%20agendar%20un%20turno%21" target="_blank" rel="noopener noreferrer" data-club="agendar">
       <svg class="club-tabbar__icono" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm12 8v9H5v-9h14Z"/>
       </svg>
