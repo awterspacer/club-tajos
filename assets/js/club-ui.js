@@ -993,7 +993,22 @@
     }
 
     boton.addEventListener('click', function () {
-      dom.copiarTexto(entrada.value).then(function (copiado) {
+      var texto = entrada.value;
+
+      if (!texto) {
+        dom.setText(estado, 'No hay enlace disponible.');
+        dom.show(estado);
+        return;
+      }
+
+      entrada.removeAttribute('readonly');
+      entrada.focus();
+      entrada.select();
+      entrada.setSelectionRange(0, texto.length);
+
+      function terminar(copiado) {
+        entrada.setAttribute('readonly', '');
+
         if (copiado) {
           dom.setText(estado, '¡Copiado!');
           dom.show(estado);
@@ -1001,17 +1016,30 @@
           global.setTimeout(function () {
             dom.hide(estado);
           }, 2000);
+
           return;
         }
 
         dom.setText(estado, 'No se pudo copiar. Seleccioná el enlace y copialo manualmente.');
         dom.show(estado);
-        entrada.select();
-      });
+      }
+
+      if (global.navigator && global.navigator.clipboard && global.navigator.clipboard.writeText) {
+        global.navigator.clipboard.writeText(texto).then(function () {
+          terminar(true);
+        }, function () {
+          terminar(copiarConTextarea(texto));
+        });
+
+        return;
+      }
+
+      terminar(copiarConTextarea(texto));
     });
 
     marcarListo(boton);
   };
+
 
   ui.mostrarContenidoMiembro = function () {
     var cargando = dom.hook('cargando');
